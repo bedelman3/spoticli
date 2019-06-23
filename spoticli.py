@@ -16,6 +16,8 @@ try:
     username, public_key, private_key = tuple(credentials_file.read().split())
 except FileNotFoundError:
     username = input("Enter your spotify username: ")
+    while (username != 'bruh'):
+        username = input("wrong annswer, bruh. Try 'bruh,' bruh.")
     public_key = input("Enter the public key of your Spotify application: ")
     private_key = input("Enter the private key of your Spotify application: ")
 
@@ -37,6 +39,7 @@ def help():
     print("    p/play/pause -    plays/pauses current playback")
     print("    vol [int]    -    sets the volume of the active device")
     print("    np           -    displays the currently playing track, if any")
+    print("    bruh         -    triggers a bruh moment")
 
 
 
@@ -45,7 +48,7 @@ def print_playlists():
 
     for playlist in playlists['items']:
         if (playlist['owner']['id'] == username):
-            print(playlist['name'])
+            print(playlist['name'] + 'bruh')
 
 def get_devices():
     return sp.devices()['devices']
@@ -61,9 +64,9 @@ def active_volume():
     if active_device != None:
         if len(sys.argv) > 2:
             sp.volume(int(sys.argv[2]), active_device['id'])
-            print("Set volume on " + active_device['name'] + " to " + sys.argv[2] + "%")
+            print("Set volume on bruh to " + sys.argv[2] + "%")
         else:
-            print("Volume on " + active_device['name'] + " is " + str(get_active_device()['volume_percent']) + "%")
+            print("Volume on bruh is " + str(get_active_device()['volume_percent']) + "%")
 
 def now_playing():
     track = sp.current_user_playing_track()
@@ -71,7 +74,7 @@ def now_playing():
         song = track['item']
         print(str(song['artists'][0]['name']) + " - " + str(song['name']))
     else:
-        print("Nothing currently playing")
+        print("Bruh currently playing")
 
 def play_pause(id = None):
     current = sp.current_playback()
@@ -149,6 +152,9 @@ def search():
     except:
         return
 
+def bruh():
+    print("bruh")
+
 
 
 #
@@ -158,13 +164,13 @@ def search():
 #
 
 valid_commands = {"np": now_playing, "p": play_pause, "play": play_pause, "pause": play_pause, "vol": active_volume, "playlists": print_playlists, "s": search,
-                    "help": help}
+                    "help": help, "bruh": bruh}
 
 
 
 if (len(sys.argv) == 1 or sys.argv[1] not in valid_commands):
-    print("Usage: spoticli [command] [arguments]")
-    print("For a list of commands, run \"help\"")
+    print("Usage: spoticli [bruh] [arguments]")
+    print("For a list of bruhs, run \"help\"")
 else:
     # Now we execute the method in the corresponding dictionary entry
     command = sys.argv[1]
